@@ -1,6 +1,6 @@
 import "../styles/pages/Login.css"
 
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import Button from "../components/ui/Button"
 

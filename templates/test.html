@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Account</title>
+    </head>
+    <body>
+        <h1> Create Account: </h1>
+        
+        <form method="post">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name ="email"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name ="password"><br>
+            <button type="submit">Submit</button>
+        </form>
+
+        <a href="{{ url_for('login') }}">Login</a>
+
+
+        <h2>All Users:</h2>
+        {% for user in users %}
+            <p>{{user['email']}} | "{{user['password']}}"</p>
+        {% endfor %}
+    </body>
+</html>

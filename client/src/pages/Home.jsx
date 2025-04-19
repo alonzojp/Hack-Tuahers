@@ -73,6 +73,9 @@ const Home = () => {
     
 
     const startListening = () => {
+        if (navigator.vibrate) {
+            navigator.vibrate(200);
+        }
         recognitionRef.current?.start()
     }
 

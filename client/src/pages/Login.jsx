@@ -17,8 +17,8 @@ const Login = () => {
             <div className="actual-login-container">
                 <h1>Login</h1>
                 <div className="inputs">
-                    <h1>Email</h1><input type="text" />
-                    <h1>Password</h1><input type="password" />
+                    <h1>Email</h1><input type="text" id="email" name ="email"/>
+                    <h1>Password</h1><input type="password" id="password" name="password" />
                 </div>
                 <div className="submit">
                     <Button title={"Login"} onClick={() => {logThatUserIn}}/>

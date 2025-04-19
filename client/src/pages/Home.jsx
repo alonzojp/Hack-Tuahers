@@ -96,8 +96,10 @@ const Home = () => {
             speak("No Object Inputted")
             return;
         }
-        else
+        else {
+            speak(`Now searching for ${objectToFind}`)
             navigate("/search", { state: { objectToFind } })
+        }
     }
 
     return(

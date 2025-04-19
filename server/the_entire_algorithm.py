@@ -51,7 +51,7 @@ def detect():
                 center_x = x1 + width / 2
 
                 size_ratio = max(width / screen_width, height / screen_height)
-                freeze_time = 1 - size_ratio ** (1/2)
+                freeze_time = 1 - size_ratio ** (1/3)
                 freeze_time = max(0.25, min(freeze_time, 1))
                 beeps = int(1 // freeze_time)
 

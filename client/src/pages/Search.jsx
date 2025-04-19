@@ -14,6 +14,14 @@ const Search = () => {
     const location = useLocation();
     const { objectToFind } = location.state;
 
+    const speak = (text) => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "en-US";
+        utterance.rate = 1;
+        utterance.pitch = 1;
+        window.speechSynthesis.speak(utterance);
+    };
+
     useEffect(() => {
         const startCamera = async () => {
 
@@ -132,6 +140,7 @@ const Search = () => {
             if (!audioCtxRef.current) {
                 audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
                 console.log("AudioContext created.");
+                speak(`scanning for ${objectToFind}. If the frequency is high, the object you are looking for is to the right. If the frequency is low, the object is to the left. If the frequency is in between, the object is right in front of you. The sounds will increase at a faster pace when you are closer to your object`)
             } else if (audioCtxRef.current.state === "suspended") {
                 audioCtxRef.current.resume().then(() => {
                     console.log("AudioContext resumed.");

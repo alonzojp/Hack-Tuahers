@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Real-Time Object Detection</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    video, canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    canvas {
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <video id="webcam" autoplay playsinline muted></video>
+  <canvas id="overlay"></canvas>
+
+  <script>
+    const video = document.getElementById('webcam');
+    const overlay = document.getElementById('overlay');
+    const ctx = overlay.getContext('2d');
+    <!-- const DETECT_URL = "http://localhost:5000/detect";  -->
+    const DETECT_URL = "https://hack-tuahers-sbej.onrender.com/detect";
+
+    async function startCamera() {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      video.srcObject = stream;
+
+      return new Promise((resolve) => {
+        video.onloadedmetadata = () => resolve();
+      });
+    }
+
+    async function sendFrame() {
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = video.videoWidth;
+      tempCanvas.height = video.videoHeight;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+
+      const blob = await new Promise(resolve => tempCanvas.toBlob(resolve, 'image/jpeg'));
+
+      const formData = new FormData();
+      formData.append("frame", blob, "frame.jpg");
+
+      try {
+        const res = await fetch(DETECT_URL, {
+          method: "POST",
+          body: formData
+        });
+
+        const detections = await res.json();
+        drawDetections(detections);
+      } catch (error) {
+        console.error("Detection error:", error);
+      }
+    }
+
+    function drawDetections(detections) {
+      overlay.width = video.videoWidth;
+      overlay.height = video.videoHeight;
+      ctx.clearRect(0, 0, overlay.width, overlay.height);
+      ctx.strokeStyle = "lime";
+      ctx.lineWidth = 2;
+      ctx.font = "16px sans-serif";
+      ctx.fillStyle = "lime";
+
+      detections.forEach(det => {
+        const { x1, y1, x2, y2, class: label, confidence } = det;
+        ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+        ctx.fillText(`${label} (${(confidence * 100).toFixed(1)}%)`, x1 + 4, y1 + 16);
+      });
+    }
+
+    async function mainLoop() {
+      await startCamera();
+      setInterval(sendFrame, 300); // every 500ms (~2 fps)
+    }
+
+    mainLoop();
+  </script>
+</body>
+</html>

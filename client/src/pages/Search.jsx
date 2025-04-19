@@ -83,7 +83,7 @@ const Search = () => {
             });
         };
 
-        const playBeep = (frequency = 1000, duration = 240) => {
+        const playBeep = (frequency = 1000, duration = 225) => {
             if (!audioCtxRef.current) return;
 
             const oscillator = audioCtxRef.current.createOscillator();
@@ -95,13 +95,13 @@ const Search = () => {
             oscillator.frequency.value = frequency;
             oscillator.type = "sine";
         
-            const now = audioCtxRef.current.currentTime;
-            const rampTime = 0.005; 
+            // const now = audioCtxRef.current.currentTime;
+            // const rampTime = 0.005; 
 
-            gainNode.gain.setValueAtTime(0, now);
-            gainNode.gain.linearRampToValueAtTime(1, now + rampTime);
+            // gainNode.gain.setValueAtTime(0, now);
+            // gainNode.gain.linearRampToValueAtTime(1, now + rampTime);
 
-            gainNode.gain.linearRampToValueAtTime(0, now + (duration / 1000) - rampTime);
+            // gainNode.gain.linearRampToValueAtTime(0, now + (duration / 1000) - rampTime);
 
             oscillator.start(now);
             oscillator.stop(now + (duration / 1000));

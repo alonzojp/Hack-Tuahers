@@ -24,7 +24,7 @@
     const overlay = document.getElementById('overlay');
     const ctx = overlay.getContext('2d');
     <!-- const DETECT_URL = "http://localhost:5000/detect";  -->
-    const DETECT_URL = "http://10.110.166.2:5000/detect";
+    const DETECT_URL = "http://127.0.0.1:5000/detect";
 
     async function startCamera() {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });

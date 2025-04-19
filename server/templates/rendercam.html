@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CAMERA</title>
+    </head>
+    <body>
+       <p>webcam :D</p>
+        <div class="webcam-container">
+            <img id="webcam-feed" src="{{ url_for('video') }}" alt="Webcam Feed"/>
+        </div>
+
+        <script src="{{url_for('static', filename='script.js') }}"></script>
+    </body>
+
+</html>

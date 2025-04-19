@@ -127,8 +127,7 @@ const Home = () => {
                     <div className="buttons-blind">
                         <button onClick={startListening}>🎙️</button>
                         <button onClick={findItem}>Start</button>
-                        {/* <button onClick={() => {blindInstructions()}}>❓</button> */}
-                        <button onClick={() => navigator.vibrate(300)}>Test Vibrate</button>
+                        <button onClick={() => {blindInstructions()}}>❓</button>
 
                     </div>
                 </div> </>

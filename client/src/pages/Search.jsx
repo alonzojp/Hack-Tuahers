@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import "../styles/pages/Search.css";
 
-const DETECT_URL = "http://127.0.0.1:5000/detect";
+const DETECT_URL = "https://8z24cqsd-5000.usw3.devtunnels.ms/detect";
 
 const Search = () => {
     const video = useRef(null);

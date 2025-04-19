@@ -83,7 +83,7 @@ const Search = () => {
             });
         };
 
-        const playBeep = (frequency = 1000, duration = 225) => {
+        const playBeep = (frequency = 1000, duration = 240) => {
             if (!audioCtxRef.current) return;
 
             const oscillator = audioCtxRef.current.createOscillator();
@@ -103,8 +103,8 @@ const Search = () => {
 
             // gainNode.gain.linearRampToValueAtTime(0, now + (duration / 1000) - rampTime);
 
-            oscillator.start(now);
-            oscillator.stop(now + (duration / 1000));
+            oscillator.start();
+            oscillator.stop(audioCtxRef.current.currentTime + duration / 1000);
         };
 
         const resumeAudio = () => {

@@ -57,6 +57,10 @@ const Home = () => {
             timer = setTimeout(() => {
                 setIsBlind(true)
                 setIsBlindModal(false)
+
+                if (navigator.vibrate) {
+                    navigator.vibrate(200);
+                }
             }, 10000)
         }
     

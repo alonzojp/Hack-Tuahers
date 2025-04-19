@@ -144,8 +144,8 @@ const Search = () => {
         
         const handleBeeps = (direction, beeps) => {
             let freq;
-            if (direction === "left") freq = 750;
-            else if (direction === "right") freq = 1250;
+            if (direction === "left") freq = 500;
+            else if (direction === "right") freq = 1500;
             else freq = 1000;
             console.log(beeps);
 

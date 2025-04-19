@@ -18,6 +18,7 @@ const Search = () => {
         const startCamera = async () => {
 
             const input_string = {name : objectToFind}
+            console.log("input_string:" + input_string);
 
             const res = await fetch(SET_URL, {
                 method: "POST",
@@ -26,12 +27,13 @@ const Search = () => {
                 },
                 body: JSON.stringify(input_string),
             });
+            console.log(res);
 
             const output_message = await res.json();
 
             const constraints = {
                 video: {
-                    facingMode: { exact: "environment" }  // back camera
+                    facingMode: { ideal: "environment" }  // back camera
                 }
             };
             try {

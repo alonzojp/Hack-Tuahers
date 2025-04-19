@@ -17,10 +17,11 @@ model.set_classes(names, model.get_text_pe(names))
 
 @app.route("/set", methods=["POST"])
 def set():
-    print(request['name'])
-    names = [request['name']]
+    data = request.get_json()
+    print(data.get('name'))
+    names = [data.get('name')]
     model.set_classes(names, model.get_text_pe(names))
-    return "Working"
+    return jsonify({"message": "YIPPEE"}), 200
 
 @app.route("/detect", methods=["POST"])
 def detect():

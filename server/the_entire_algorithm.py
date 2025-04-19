@@ -18,7 +18,9 @@ model.set_classes(names, model.get_text_pe(names))
 @app.route("/set", methods=["POST"])
 def set():
     print(request['name'])
-    return "Test"
+    names = [request['name']]
+    model.set_classes(names, model.get_text_pe(names))
+    return "Working"
 
 @app.route("/detect", methods=["POST"])
 def detect():

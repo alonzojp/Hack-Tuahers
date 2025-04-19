@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import "../styles/pages/Search.css";
+import { useLocation } from "react-router-dom";
 
 const DETECT_URL = "https://8z24cqsd-5000.usw3.devtunnels.ms/detect";
 const SET_URL = "https://8z24cqsd-5000.usw3.devtunnels.ms/set";
@@ -10,10 +11,13 @@ const Search = () => {
     const overlay = useRef(null);
     const audioCtxRef = useRef(null);
 
+    const location = useLocation();
+    const { objectToFind } = location.state;
+
     useEffect(() => {
         const startCamera = async () => {
 
-            const input_string = {name : "bottle"}
+            const input_string = {name : objectToFind}
 
             const res = await fetch(SET_URL, {
                 method: "POST",

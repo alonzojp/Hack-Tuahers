@@ -1,8 +1,8 @@
-import "../../styles/components/ui/Navbar.css"
+import "../../styles/components/ui/Button.css"
 
 const Button = ({ title, onClick }) => {
     return(
-        <button onClick={onClick}>
+        <button className="button-component" onClick={onClick}>
             {title}
         </button>
     )

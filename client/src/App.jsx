@@ -1,11 +1,11 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Search from "./pages/Search";
 import NotFound from "./pages/NotFound";
 
-import Navbar from "./components/ui/Navbar";
+
+import "./styles/index.css"
 
 function App() {
 
@@ -14,16 +14,8 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route index element={<Home />} />
-					<Route path='/login' element={<Login />} />
-					<Route path='/signup' element={<Signup />} />
-					<Route path='' element={<Navbar />}>
-						<Route path='/home' element={<Home />} />
-
-
-
-						
-					</Route>
-					
+					<Route path='/home' element={<Home />} />
+					<Route path='/search' element={<Search />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</BrowserRouter>

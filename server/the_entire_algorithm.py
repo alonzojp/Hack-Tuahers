@@ -14,6 +14,12 @@ model = YOLOE("yoloe-11l-seg.pt")
 names = ["bottle"]
 model.set_classes(names, model.get_text_pe(names))
 
+
+@app.route("/set", methods=["POST"])
+def set():
+    print(request['name'])
+    return "Test"
+
 @app.route("/detect", methods=["POST"])
 def detect():
     if "frame" not in request.files:

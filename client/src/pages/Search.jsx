@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import "../styles/pages/Search.css";
 
 const DETECT_URL = "https://8z24cqsd-5000.usw3.devtunnels.ms/detect";
+const SET_URL = "https://8z24cqsd-5000.usw3.devtunnels.ms/set";
+
 
 const Search = () => {
     const video = useRef(null);
@@ -10,6 +12,19 @@ const Search = () => {
 
     useEffect(() => {
         const startCamera = async () => {
+
+            const input_string = {name : "bottle"}
+
+            const res = await fetch(SET_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(input_string),
+            });
+
+            const output_message = await res.json();
+
             const constraints = {
                 video: {
                     facingMode: { exact: "environment" }  // back camera

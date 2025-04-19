@@ -1,0 +1,40 @@
+.dimmed-background {
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1000;
+}
+
+.modal-container {
+    position: relative;
+    width: 80%;
+    height: 50%;
+    background-color: var(--light-blue);
+    z-index: 10001;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.close-the-modal {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: fit-content;
+    padding: 5px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+}
+
+.modal-container {
+    color: var(--black);
+}
+

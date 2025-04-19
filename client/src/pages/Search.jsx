@@ -95,8 +95,16 @@ const Search = () => {
             oscillator.frequency.value = frequency;
             oscillator.type = "sine";
         
-            oscillator.start();
-            oscillator.stop(audioCtxRef.current.currentTime + duration / 1000);
+            const now = audioCtxRef.current.currentTime;
+            const rampTime = 0.005; 
+
+            gainNode.gain.setValueAtTime(0, now);
+            gainNode.gain.linearRampToValueAtTime(1, now + rampTime);
+
+            gainNode.gain.linearRampToValueAtTime(0, now + (duration / 1000) - rampTime);
+
+            oscillator.start(now);
+            oscillator.stop(now + (duration / 1000));
         };
 
         const resumeAudio = () => {

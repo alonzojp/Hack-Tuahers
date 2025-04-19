@@ -83,7 +83,7 @@ const Search = () => {
             });
         };
 
-        const playBeep = (frequency = 1000, duration = 250) => {
+        const playBeep = (frequency = 1000, duration = 240) => {
             if (!audioCtxRef.current) return;
 
             const oscillator = audioCtxRef.current.createOscillator();
@@ -123,7 +123,7 @@ const Search = () => {
             for (let i = 0; i < beeps; i++) {
                 console.log("HELLO");
                 // playBeep();
-                setTimeout(() => playBeep(freq), i * (1000 / beeps));
+                setTimeout(() => playBeep(freq), i * 250);
             }
         };
 

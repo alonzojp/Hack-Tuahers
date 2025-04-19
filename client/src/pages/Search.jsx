@@ -10,13 +10,22 @@ const Search = () => {
 
     useEffect(() => {
         const startCamera = async () => {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            if (video.current) {
-                video.current.srcObject = stream;
-
-                return new Promise((resolve) => {
-                    video.current.onloadedmetadata = () => resolve();
-                });
+            const constraints = {
+                video: {
+                    facingMode: { exact: "environment" }  // back camera
+                }
+            };
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                if (video.current) {
+                    video.current.srcObject = stream;
+    
+                    return new Promise((resolve) => {
+                        video.current.onloadedmetadata = () => resolve();
+                    });
+                }
+            } catch (err) {
+                console.error("Error accessing camera:", err);
             }
         };
 

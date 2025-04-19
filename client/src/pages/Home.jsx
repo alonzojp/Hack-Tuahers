@@ -27,6 +27,8 @@ const Home = () => {
                 const transcript = event.results[0][0].transcript
                 setObjectToFind(transcript)
                 console.log("You said:", transcript)
+
+                speak(`You said: ${transcript}`)
             }
 
             recognition.onerror = (e) => {

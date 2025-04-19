@@ -57,7 +57,7 @@ const Home = () => {
             timer = setTimeout(() => {
                 setIsBlind(true)
                 setIsBlindModal(false)
-            }, 1000)
+            }, 10000)
         }
     
         return () => clearTimeout(timer)
@@ -83,7 +83,12 @@ const Home = () => {
     }
 
     const findItem = () => {
-        navigate("/search", { state: { objectToFind } })
+        if (!objectToFind) {
+            speak("No Object Inputted")
+            return;
+        }
+        else
+            navigate("/search", { state: { objectToFind } })
     }
 
     return(

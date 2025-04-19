@@ -6,6 +6,7 @@ const DETECT_URL = "https://8z24cqsd-5000.usw3.devtunnels.ms/detect";
 const Search = () => {
     const video = useRef(null);
     const overlay = useRef(null);
+    const audioCtxRef = useRef(null);
 
     useEffect(() => {
         const startCamera = async () => {
@@ -44,6 +45,10 @@ const Search = () => {
 
                 const detections = await res.json();
                 drawDetections(detections);
+                if (detections.length > 0) {
+                    const { direction, beeps } = detections[0]; // assuming one main detection
+                    handleBeeps(direction, beeps);
+                }
             } catch (error) {
                 console.error("Detection error:", error);
             }
@@ -69,9 +74,64 @@ const Search = () => {
             });
         };
 
+        const playBeep = (frequency = 1000, duration = 250) => {
+            if (!audioCtxRef.current) return;
+
+            const oscillator = audioCtxRef.current.createOscillator();
+            const gain = audioCtxRef.current.createGain();
+        
+            oscillator.connect(gain);
+            gain.connect(audioCtxRef.current.destination);
+        
+            oscillator.frequency.value = frequency;
+            oscillator.type = "sine";
+        
+            oscillator.start();
+            oscillator.stop(audioCtxRef.current.currentTime + duration / 1000);
+        };
+
+        const resumeAudio = () => {
+            if (!audioCtxRef.current) {
+                audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+                console.log("AudioContext created.");
+            } else if (audioCtxRef.current.state === "suspended") {
+                audioCtxRef.current.resume().then(() => {
+                    console.log("AudioContext resumed.");
+                });
+            }
+            document.removeEventListener("click", resumeAudio);
+        };
+
+        document.addEventListener("click", resumeAudio);
+        
+        const handleBeeps = (direction, beeps) => {
+            let freq;
+            if (direction === "left") freq = 750;
+            else if (direction === "right") freq = 1250;
+            else freq = 1000;
+            console.log(beeps);
+
+            for (let i = 0; i < beeps; i++) {
+                console.log("HELLO");
+                // playBeep();
+                setTimeout(() => playBeep(freq), i * (1000 / beeps));
+            }
+        };
+
+        window.testBeep = () => {
+            if (!audioCtxRef.current) {
+                audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            audioCtxRef.current.resume().then(() => {
+                playBeep(1000);
+            });
+        };
+
         const mainLoop = async () => {
             await startCamera();
-            setInterval(sendFrame, 333);
+            setInterval(sendFrame, 1000);
+            // sendFrame()
+            // await new Promise(r => setTimeout(r, 5000));
         };
 
         mainLoop();

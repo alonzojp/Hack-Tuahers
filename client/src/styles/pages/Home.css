@@ -1,0 +1,111 @@
+.home-container {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--light-blue) !important;
+}
+
+.is-blind {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.prompt {
+    height: 40%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+}
+
+.prompt input {
+    text-align: center;
+    color: var(--blue);
+}
+
+.prompt-blind {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.buttons {
+    width: 90%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.buttons-blind {
+    height: 100dvh;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons-blind button {
+    flex: 1;
+    background-color: var(--light-blue);
+    border: 1px solid var(--blue);
+    font-size: 4rem;
+
+}
+
+.is-blind p {
+    text-align: center;
+}
+
+.begin-button {
+    position: absolute;
+    background: transparent ;
+    height: 100dvh;
+    width: 100%;
+    z-index: 10000;
+}
+
+.title {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    font-size: 1.5rem;
+    font-size: 600;
+}
+
+.prompt h2 {
+    color: var(--white);
+    font-size: 400;
+}
+
+.prompt input {
+    width: 100%;
+	background: none;
+	border: none;
+    /* background-color: var(--white); */
+	color: var(--white);
+	font-size: 1.5rem;
+	border-bottom: 2px solid var(--white);
+	transition: border-bottom 0.2s ease-in-out;
+    outline: none;
+}
+
+.prompt input:focus {
+    border-bottom: 2px solid var(--blue);
+	outline: none;
+}

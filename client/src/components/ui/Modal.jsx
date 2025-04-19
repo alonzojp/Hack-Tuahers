@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import "../../styles/components/ui/Navbar.css"
+import "../../styles/components/ui/Modal.css"
 
 const Modal = ({ isOpen, onClose, children }) => {
 
@@ -17,9 +17,9 @@ const Modal = ({ isOpen, onClose, children }) => {
         <>
             <div className="dimmed-background">
                 <div className="modal-container">
-                    <button onClick={onClose}>✕</button>
+                    <button className="close-the-modal" onClick={onClose}>✕</button>
+                    {children}
                 </div>
-                {children}
             </div>
         </>
     )
